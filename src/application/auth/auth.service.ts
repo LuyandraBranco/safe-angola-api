@@ -13,12 +13,12 @@ export class AuthService implements IAuthService {
   ) {}
 
   generateJwtToken(user: User): string {
-    const payload = { id: user.id, username: user.username, role: user.role };
+    const payload = { id: user.id, email: user.email, role: user.role };
     return this.jwtService.sign(payload);
   }
 
-  async validateUser(username: string, password: string): Promise<any> {
-    const user = await this.authRepository.findByUsername(username);
+  async validateUser(email: string, password: string): Promise<any> {
+    const user = await this.authRepository.findByEmail(email);
 
     if (user && await bcrypt.compare(password, user.password)) {
       const { password, ...userWithoutPassword } = user;

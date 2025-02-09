@@ -9,7 +9,7 @@ export class UsersService implements IUsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
   async createUser(
-    username: string,
+    name: string,
     email: string,
     password: string,
     telephone: string,
@@ -18,7 +18,7 @@ export class UsersService implements IUsersService {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User(
       crypto.randomUUID(),
-      username,
+      name,
       email,
       hashedPassword,
       telephone,

@@ -6,7 +6,7 @@ import { IAuthRepository } from 'src/domain/repositories/auth.repository.interfa
 export class AuthRepository implements IAuthRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findByUsername(username: string): Promise<any> {
-    return await this.prisma.user.findUnique({ where: { username } });
+  async findByEmail(email: string): Promise<any> {
+    return await this.prisma.user.findUnique({ where: { email } });
   }
 }

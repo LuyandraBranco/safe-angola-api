@@ -2,7 +2,7 @@ import { User } from 'src/domain/entities/user.entity';
 
 export interface IUsersService {
   createUser(
-    username: string,
+    name: string,
     email: string,
     password: string,
     telephone: string,
