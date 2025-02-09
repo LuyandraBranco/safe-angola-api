@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name  String   @unique
-  email  String   @unique 
-  password  String
-  telephone  String @unique
-  role      Role
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
+  id              String           @id @default(cuid())
+  name            String           @unique
+  email           String           @unique
+  password        String
+  telephone       String           @unique
+  role            Role
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  accidentReports AccidentReport[]
 }
 
 enum Role {
@@ -23,4 +24,20 @@ enum Role {
   ADMIN
   AMBULANCE
   POLICE
+}
+
+model AccidentReport {
+  id        String       @id @default(cuid())
+  latitude  String
+  longitude String
+  status    ReportStatus
+  createdAt DateTime     @default(now())
+  userId    String?
+  User      User?        @relation(fields: [userId], references: [id])
+}
+
+enum ReportStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
 }
