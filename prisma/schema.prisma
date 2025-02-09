@@ -32,8 +32,10 @@ model AccidentReport {
   longitude String
   status    ReportStatus
   createdAt DateTime     @default(now())
-  userId    String?
-  User      User?        @relation(fields: [userId], references: [id])
+  userId    String
+  User      User        @relation(fields: [userId], references: [id])
+
+  @@map("accidentReport")
 }
 
 enum ReportStatus {
