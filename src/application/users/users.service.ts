@@ -9,13 +9,17 @@ export class UsersService implements IUsersService {
 
   async createUser(
     username: string,
+    email: string,
     password: string,
+    telephone: string,
     role: 'USER' | 'ADMIN' | 'AMBULANCE' | 'POLICE',
   ): Promise<User> {
     const user = new User(
       crypto.randomUUID(),
       username,
+      email,
       password,
+      telephone,
       role,
       true,
       new Date(),

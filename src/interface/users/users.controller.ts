@@ -22,7 +22,7 @@ export class UsersController {
     if (!body.username || !body.password || !body.role) {
       throw new BadRequestException('Username, password, and role are required.');
     }
-    return this.userService.createUser(body.username, body.password, body.role);
+    return this.userService.createUser(body.username, body.email, body.password, body.telephone, body.role);
   }
 
   @UseGuards(JwtAuthGuard)

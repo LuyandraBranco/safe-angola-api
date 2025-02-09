@@ -7,10 +7,6 @@ import { User } from '../../domain/entities/user.entity';
 export class UsersRepository implements IUsersRepository {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findByUsername(username: string): Promise<any> {
-    return this.prisma.user.findUnique({ where: { username } });
-  }
-
   async create(user: User): Promise<User> {
     return this.prisma.user.create({ data: user });
   }
