@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UsersRepository } from '../../infra/repositories/users.repository';
 import { User } from 'src/domain/entities/user.entity';
 import { IUsersService } from '../interfaces/users.interface';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService implements IUsersService {
@@ -14,11 +15,12 @@ export class UsersService implements IUsersService {
     telephone: string,
     role: 'USER' | 'ADMIN' | 'AMBULANCE' | 'POLICE',
   ): Promise<User> {
+    const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User(
       crypto.randomUUID(),
       username,
       email,
-      password,
+      hashedPassword,
       telephone,
       role,
       true,

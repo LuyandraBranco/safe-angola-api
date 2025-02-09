@@ -3,6 +3,7 @@ import { IAuthService } from '../interfaces/auth.interface';
 import { User } from 'src/domain/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { AuthRepository } from 'src/infra/repositories/auth.repository';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -19,7 +20,7 @@ export class AuthService implements IAuthService {
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.authRepository.findByUsername(username);
 
-    if (user && user.password === password) {
+    if (user && await bcrypt.compare(password, user.password)) {
       const { password, ...userWithoutPassword } = user;
       const accessToken = this.generateJwtToken(userWithoutPassword);
 
