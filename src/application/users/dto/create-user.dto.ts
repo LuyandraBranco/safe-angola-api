@@ -1,19 +1,23 @@
-import { IsNotEmpty, IsString, IsEnum } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateAccidentReportDto {
+export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
-  latitude: string;
-
-  @IsString()
-  @IsNotEmpty()
-  longitude: string;
-
-  @IsEnum(['PENDING', 'CONFIRMED', 'REJECTED'])
-  @IsNotEmpty()
-  status: 'PENDING' | 'CONFIRMED' | 'REJECTED';
+  name: string;
 
   @IsString()
   @IsNotEmpty()
-  userId: string;
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  telephone: string;
+
+  @IsString()
+  @IsNotEmpty()
+  role: 'USER' | 'ADMIN' | 'AMBULANCE' | 'POLICE';
 }

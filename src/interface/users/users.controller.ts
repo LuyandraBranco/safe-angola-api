@@ -25,13 +25,11 @@ export class UsersController {
     return this.userService.createUser(body.name, body.email, body.password, body.telephone, body.role);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   async getAllUsers() {
     return this.userService.getAllUsers();
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('user/:id')
   async getUser(@Param('id') id: string) {
     return this.userService.getUserById(id);

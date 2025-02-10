@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { AccidentReportsService } from 'src/application/accident-report/accident.report.service';
-import { CreateAccidentReportDto } from 'src/application/users/dto/create-user.dto';
+import { CreateAccidentReportDto } from 'src/application/accident-report/dto/create-accident-report.dto';
 
-@Controller('accident-reports')
+@Controller('accident-report')
 export class AccidentReportsController {
   constructor(
     private readonly accidentReportsService: AccidentReportsService,
@@ -35,8 +35,7 @@ export class AccidentReportsController {
     );
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get()
+  @Get('')
   async getAllReports() {
     return this.accidentReportsService.getAllReports();
   }
