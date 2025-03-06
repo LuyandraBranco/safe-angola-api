@@ -5,8 +5,8 @@ import { UsersModule } from './modules/users.module';
 import { AccidentReportModule } from './modules/accident.report.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, UsersModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, UsersModule, AccidentReportModule],
   controllers: [],
   providers: [AuthModule, UsersModule, AccidentReportModule],
 })
-export class AppModule {}
+export class AppModule { }

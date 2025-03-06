@@ -17,7 +17,7 @@ import { CreateAccidentReportDto } from 'src/application/accident-report/dto/cre
 export class AccidentReportsController {
   constructor(
     private readonly accidentReportsService: AccidentReportsService,
-  ) {}
+  ) { }
 
   @Post('create')
   async createReport(@Body() body: CreateAccidentReportDto) {
