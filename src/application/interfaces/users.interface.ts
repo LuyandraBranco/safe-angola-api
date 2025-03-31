@@ -6,7 +6,7 @@ export interface IUsersService {
     email: string,
     password: string,
     phone: string,
-    role: string,
+    role: string
   ): Promise<User>;
   getAllUsers(): Promise<User[] | null>;
   getUserById(id: string): Promise<User | null>;

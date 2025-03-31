@@ -6,13 +6,13 @@ import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService implements IUsersService {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(private readonly usersRepository: UsersRepository) { }
 
   async createUser(
     name: string,
     email: string,
     password: string,
-    telephone: string,
+    phone: string,
     role: 'USER' | 'ADMIN' | 'AMBULANCE' | 'POLICE',
   ): Promise<User> {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,10 +21,12 @@ export class UsersService implements IUsersService {
       name,
       email,
       hashedPassword,
-      telephone,
+      phone,
       role,
+      false,
       true,
       new Date(),
+      new Date()
     );
 
     return this.usersRepository.create(user);
