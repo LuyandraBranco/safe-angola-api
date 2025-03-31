@@ -11,7 +11,7 @@ model User {
   id              String           @id @default(cuid())
   name            String           @unique
   email           String           @unique
-  passwordHash    String
+  password    String
   phone           String           @unique
   role            Role
   twoFactor       Boolean          @default(false)
