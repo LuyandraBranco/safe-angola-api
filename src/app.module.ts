@@ -7,6 +7,6 @@ import { AccidentReportModule } from './modules/accident.report.module';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), AuthModule, UsersModule, AccidentReportModule],
   controllers: [],
-  providers: [AuthModule, UsersModule, AccidentReportModule],
+  providers: [AuthModule, UsersModule],
 })
 export class AppModule { }
