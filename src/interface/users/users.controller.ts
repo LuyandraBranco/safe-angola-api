@@ -6,9 +6,9 @@ import {
   Get,
   Param,
   Patch,
-  Delete,
-  BadRequestException,
+  Delete
 } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 import { UsersService } from 'src/application/users/users.service';
 import { CreateUserDto } from 'src/application/users/dto/create-user.dto';
@@ -17,12 +17,15 @@ import { CreateUserDto } from 'src/application/users/dto/create-user.dto';
 export class UsersController {
   constructor(private readonly userService: UsersService) { }
 
-  @Post('create')
-  async createUser(@Body() body: CreateUserDto) {
-    if (!body.name || !body.password || !body.role) {
-      throw new BadRequestException('Name, password, and role are required.');
-    }
-    return this.userService.createUser(body.name, body.email, body.password, body.phone, body.role);
+  @Post()
+  async createUser(@Body(new ValidationPipe()) body: CreateUserDto) {
+    return this.userService.createUser(
+      body.name,
+      body.email,
+      body.password,
+      body.phone,
+      body.role
+    );
   }
 
   @Get()
@@ -30,13 +33,13 @@ export class UsersController {
     return this.userService.getAllUsers();
   }
 
-  @Get('user/:id')
+  @Get('/:id')
   async getUser(@Param('id') id: string) {
     return this.userService.getUserById(id);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Patch(':id')
+  @Patch('/:id')
   async updateUser(@Param('id') id: string, @Body() body) {
     return this.userService.updateUser(id, body);
   }
