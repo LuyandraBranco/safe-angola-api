@@ -98,7 +98,7 @@ enum SensorType {
 
 model Setting {
   id                 String  @id @default(cuid())
-  userId             String
+  userId             String  @unique 
   user               User    @relation(fields: [userId], references: [id])
   notifications      Boolean @default(true)
   locationSharing    Boolean @default(true)
