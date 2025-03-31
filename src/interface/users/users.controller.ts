@@ -15,14 +15,14 @@ import { CreateUserDto } from 'src/application/users/dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService: UsersService) {}
+  constructor(private readonly userService: UsersService) { }
 
   @Post('create')
   async createUser(@Body() body: CreateUserDto) {
     if (!body.name || !body.password || !body.role) {
-      throw new BadRequestException('Username, password, and role are required.');
+      throw new BadRequestException('Name, password, and role are required.');
     }
-    return this.userService.createUser(body.name, body.email, body.password, body.telephone, body.role);
+    return this.userService.createUser(body.name, body.email, body.password, body.phone, body.role);
   }
 
   @Get()
